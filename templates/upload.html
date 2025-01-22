@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Upload CSV - IDS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .container {
+        margin-top: 2rem;
+      }
+      .table th,
+      .table td {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="text-center">Upload CSV File for Prediction</h2>
+
+      <!-- Download Sample Dataset Section -->
+      <div class="mb-3 text-center">
+        <p>Download the sample dataset for reference:</p>
+        <p><small>Ensure column names match the expected format.</small></p>
+        <a
+          href="{{ url_for('download_file', filename='dataset.csv') }}"
+          download
+          class="btn btn-secondary"
+          >Download Sample Dataset</a
+        >
+      </div>
+
+      <!-- Upload Form -->
+      <form
+        action="/upload"
+        method="POST"
+        enctype="multipart/form-data"
+        class="mt-4"
+      >
+        <div class="mb-3">
+          <label for="csvfile" class="form-label">Select CSV File (with features):</label>
+          <input
+            type="file"
+            id="csvfile"
+            name="csvfile"
+            class="form-control"
+            accept=".csv"
+            required
+          />
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Upload and Predict</button>
+        </div>
+      </form>
+
+      <!-- Prediction Categories -->
+      <div class="mt-5">
+        <h3 class="text-center">Prediction Categories</h3>
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>Prediction Code</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>Normal</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>Denial of Service (DoS)</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Probe</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Remote-to-Local (R2L)</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>User-to-Root (U2R)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Prediction Results from Uploaded File -->
+      {% if predictions %}
+        <div class="mt-5" id="prediction-results">
+          <h3 class="text-center">Predictions from Uploaded File</h3>
+          <table class="table table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>Prediction Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for index, result in predictions.items() %}
+                <tr>
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ result['prediction_code'] }}</td>
+                  <td>{{ result['description'] }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Option to Download Results -->
+        <div class="text-center">
+          <a href="{{ url_for('download_predictions') }}" class="btn btn-success">
+            Download Prediction Results
+          </a>
+        </div>
+      {% else %}
+        <!-- Message when no predictions are available -->
+        <div class="text-center mt-5">
+          <h4>No predictions available. Upload a CSV file to get predictions.</h4>
+        </div>
+      {% endif %}
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2AojlGNGFRm3nw6c6F4kpFhkp6SO9pP1C02xI0xbpLE2PCp3VhLTvjbx5jx"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

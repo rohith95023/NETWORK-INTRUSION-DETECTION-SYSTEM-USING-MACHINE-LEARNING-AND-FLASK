@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IDS</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+      .container {
+        margin-top: 2rem;
+      }
+      .navbar {
+        font-family: "Lato", sans-serif;
+      }
+      .custom-border {
+        border: 2px solid #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .custom-border label {
+        font-weight: bold;
+      }
+      .custom-border input,
+      .form-select {
+        border-color: #0ea5e9;
+      }
+      .custom-border button {
+        margin-top: 0.5rem;
+        margin-bottom: -0.5rem;
+      }
+      .footer__title {
+        padding: 1rem;
+        background-color: #212529;
+        color: #ffffff;
+        margin-bottom: -1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/index">
+          <img
+            src="static/icon.JPG"
+            alt="Logo"
+            width="30"
+            height="30"
+            class="d-inline-block align-text-top rounded-circle"
+          />
+          IDS - Network Intrusion Detection System
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="/index">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/predict">Predict</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/upload">Upload</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container custom-border">
+      <form action="/predict" method="POST">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="duration" class="form-label">Duration (in seconds):</label>
+            <input
+              type="number"
+              id="duration"
+              name="duration"
+              class="form-control"
+              placeholder="Duration"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="protocol_type" class="form-label">Protocol Type:</label>
+            <select id="protocol_type" name="protocol_type" class="form-select" required>
+              <option value="tcp">TCP</option>
+              <option value="udp">UDP</option>
+              <option value="icmp">ICMP</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="service" class="form-label">Service:</label>
+            <input
+              type="text"
+              id="service"
+              name="service"
+              class="form-control"
+              placeholder="Service Type"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="flag" class="form-label">Connection Flag:</label>
+            <select id="flag" name="flag" class="form-select" required>
+              <option value="oth">OTH</option>
+              <option value="s0">S0</option>
+              <option value="sf">SF</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="src_bytes" class="form-label">Source Bytes:</label>
+            <input
+              type="number"
+              id="src_bytes"
+              name="src_bytes"
+              class="form-control"
+              placeholder="Source Bytes"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="dst_bytes" class="form-label">Destination Bytes:</label>
+            <input
+              type="number"
+              id="dst_bytes"
+              name="dst_bytes"
+              class="form-control"
+              placeholder="Destination Bytes"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="land" class="form-label">Land:</label>
+            <select id="land" name="land" class="form-select" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="wrong_fragment" class="form-label">Wrong Fragment:</label>
+            <input
+              type="number"
+              id="wrong_fragment"
+              name="wrong_fragment"
+              class="form-control"
+              placeholder="Wrong Fragment Count"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="urgent" class="form-label">Urgent Packets:</label>
+            <input
+              type="number"
+              id="urgent"
+              name="urgent"
+              class="form-control"
+              placeholder="Urgent Packets"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="hot" class="form-label">Hot Indicators:</label>
+            <input
+              type="number"
+              id="hot"
+              name="hot"
+              class="form-control"
+              placeholder="Hot Indicator Count"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="num_failed_logins" class="form-label">Failed Logins:</label>
+            <input
+              type="number"
+              id="num_failed_logins"
+              name="num_failed_logins"
+              class="form-control"
+              placeholder="Failed Logins"
+              required
+            />
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="root_shell" class="form-label">Root Shell:</label>
+            <select id="root_shell" name="root_shell" class="form-select" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="reset" class="btn btn-warning me-4">Reset Form</button>
+          <button type="submit" class="btn btn-success ms-4">Predict</button>
+        </div>
+      </form>
+    </div>
+
+    <footer class="footer text-center">
+      <h6 class="footer__title">~ Network Intrusion Detection System ~</h6>
+    </footer>
+  </body>
+</html>

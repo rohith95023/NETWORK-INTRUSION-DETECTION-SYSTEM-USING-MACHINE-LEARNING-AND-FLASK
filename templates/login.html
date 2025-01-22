@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Animated Login Page</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: cursive;
+        }
+
+        .glow {
+            font-size: 30px; /* Reduced size for better fit */
+            color: rgb(255, 255, 255); 
+            text-align: center;
+            font-weight: bold;
+            transition: text-shadow 0.3s ease-in-out; /* Smooth transition */
+        }
+
+        .glow:hover {
+            text-shadow: 0 0 16px rgb(255, 0, 0), 0 0 32px #eb0909, 0 0 48px #e50303, 0 0 64px #ff1e1e, 0 0 80px #ff1e1e, 0 0 96px #1e90ff, 0 0 112px #1e90ff;
+        }
+    </style>
+</head>
+<body>
+    <header style="text-align: center; margin-bottom: 60px;">
+        <h1 class="glow">Network Intrusion Detection System</h1>
+    </header>
+    <div class="container" id="container">
+        <!-- Sign-up Form -->
+        <div class="form-container sign-up">
+            <form>
+                <h1>Create Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for registration</span>
+                <input type="text" name="name" placeholder="Name" required />
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="password" name="password" placeholder="Password" required />
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sign-in Form -->
+        <div class="form-container sign-in">
+            <form id="signInForm">
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
+                    <a href="#" class="social"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email password</span>
+                <input type="email" name="email" id="email" placeholder="Email" required />
+                <input type="password" name="password" id="password" placeholder="Password" required />
+                <a href="#">Forgot your password?</a>
+                <button type="button" id="signInButton">Sign In</button>
+                <p id="error-message" style="color: red; display: none;">Please fill in both email and password fields.</p>
+            </form>
+        </div>
+
+        <!-- Toggle between Sign In and Sign Up -->
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Enter your personal details to use all of site features</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Register with your personal details to use all of site features</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
