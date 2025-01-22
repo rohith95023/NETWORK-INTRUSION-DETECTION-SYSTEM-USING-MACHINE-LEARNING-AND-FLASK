@@ -43,7 +43,7 @@ Project Structure
 
 Installation
 Clone the repository(CMD):
-git clone https://github.com/yourusername/nids.git
+git clone https://github.com/rohith95023/nids.git
 cd nids
 
 
